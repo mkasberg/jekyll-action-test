@@ -8,3 +8,7 @@ layout: home
 Hello, world!
 
 This is a test page!
+
+{% for post in site.posts %}
+* <a href="{{ post.url }}">{{ post.title }}</a>
+{% endfor %}
