@@ -12,19 +12,18 @@ on:
 
 jobs:
   github-pages:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v1
         with:
           path: vendor/bundle
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restoreKeys: |
+          restore-keys: |
             ${{ runner.os }}-gems-
-      - uses: helaili/jekyll-action@2.0.4
+      - uses: BryanSchuetz/jekyll-deploy-gh-pages@v2.0
         env:
-          JEKYLL_PAT: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          target_branch: 'gh-pages'
-      
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
+          GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
 
